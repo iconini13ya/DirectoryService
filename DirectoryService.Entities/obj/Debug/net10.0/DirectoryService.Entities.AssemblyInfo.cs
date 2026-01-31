@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DirectoryService.Entities")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+112764eb968c6ed7cf01fdba20340ddd85bee8ef")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9005be1006ba6c5aee5385e94074c8999e6dceb2")]
 [assembly: System.Reflection.AssemblyProductAttribute("DirectoryService.Entities")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DirectoryService.Entities")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
