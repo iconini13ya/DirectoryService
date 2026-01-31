@@ -4,10 +4,13 @@ namespace DirectoryService.Entities;
 
 public class Location
 {
+	private readonly List<DepartmentLocation> _locationDepartments = [];
+
 	public Location(
 		Name name, 
 		string address,
-        ValueObjects.TimeZone timeZone,
+		ValueObjects.TimeZone timeZone,
+		IEnumerable<DepartmentLocation> locationDepartments,
 		bool isActive,
 		DateTime createdAt,
 		DateTime updatedAt
@@ -20,6 +23,7 @@ public class Location
 		IsActive = true;
 		CreatedAt = createdAt;
 		UpdatedAt = updatedAt;
+		_locationDepartments = locationDepartments.ToList();
 	}
 
 	public Guid Id {  get; private set; }
@@ -35,4 +39,6 @@ public class Location
 	public DateTime CreatedAt { get; private set; }
 
 	public DateTime UpdatedAt { get; private set; }
+
+	IReadOnlyList<DepartmentLocation> LocationDepartments => _locationDepartments;
 }

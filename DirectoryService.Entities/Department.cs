@@ -3,10 +3,17 @@
 namespace DirectoryService.Entities;
 public class Department
 {
+	private readonly List<Department> _child = [];
+	private readonly List<DepartmentLocation> _departmentLocations = [];
+	private readonly List<DepartmentPosition> _departmentPositions = [];
+
 	public Department(
 		Name name,
 		Identifier identifier, 
 		Department? parent,
+		IEnumerable<Department> child,
+		IEnumerable<DepartmentLocation> departmentLocations,
+		IEnumerable<DepartmentPosition> departmentPositions,
 		DateTime createdAt,
 		DateTime updatedAt
 		)
@@ -18,9 +25,11 @@ public class Department
 		CreatedAt = createdAt;
 		UpdatedAt = updatedAt;
 		IsActive = true;
+		_child = child.ToList();
+		_departmentLocations = departmentLocations.ToList();
+		_departmentPositions = departmentPositions.ToList();
 	}
 
-	#region properties
 	public Guid Id { get; private set; }
 
 	public Name Name { get; private set; }
@@ -35,8 +44,13 @@ public class Department
 
 	public bool IsActive { get; set; }
 
+	IReadOnlyList<Department> Child => _child;
+
+	IReadOnlyList<DepartmentLocation> DepartmentLocations => _departmentLocations;
+
+	IReadOnlyList<DepartmentPosition> DepartmentPositions => _departmentPositions;
+
 	public DateTime CreatedAt { get; private set; }
 
 	public DateTime UpdatedAt { get; private set; }
-	#endregion
 }
