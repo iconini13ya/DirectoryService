@@ -9,10 +9,10 @@ public class Position
     public Position(
         Name name,
         Description description,
-        IEnumerable<DepartmentPosition> positionDepartments,
         bool isActive,
         DateTime createdAt,
-        DateTime updatedAt
+        DateTime updatedAt,
+        IEnumerable<DepartmentPosition> positionDepartments
         )
     {
         Id = Guid.NewGuid();

@@ -9,11 +9,11 @@ public class Location
     public Location(
         Name name,
         string address,
-        ValueObjects.TimeZone timeZone,
-        IEnumerable<DepartmentLocation> locationDepartments,
         bool isActive,
         DateTime createdAt,
-        DateTime updatedAt
+        DateTime updatedAt,
+        ValueObjects.TimeZone timeZone,
+        IEnumerable<DepartmentLocation> locationDepartments
         )
     {
         Id = Guid.NewGuid();

@@ -13,11 +13,11 @@ public class Department
         Identifier identifier,
         Department? parent,
         bool isActive,
+        DateTime createdAt,
+        DateTime updatedAt,
         IEnumerable<Department> child,
         IEnumerable<DepartmentLocation> departmentLocations,
-        IEnumerable<DepartmentPosition> departmentPositions,
-        DateTime createdAt,
-        DateTime updatedAt
+        IEnumerable<DepartmentPosition> departmentPositions
         )
     {
         Id = Guid.NewGuid();
