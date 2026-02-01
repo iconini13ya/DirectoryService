@@ -4,40 +4,40 @@ namespace DirectoryService.Entities;
 
 public class Department
 {
-    public Department(
-        Name name,
-        Identifier identifier,
-        Guid? parentId,
-        DateTime updatedAt,
-        Depth depth,
-        ValueObjects.Path path)
-    {
-        Id = Guid.NewGuid();
-        Name = name;
-        Identifier = identifier;
-        ParentId = parentId;
-        CreatedAt = DateTime.UtcNow;
-        UpdatedAt = CreatedAt;
-        IsActive = true;
-        Depth = depth;
-        Path = path;
-    }
+	public Department(
+		Name name,
+		Identifier identifier,
+		Guid? parentId,
+		DateTime updatedAt,
+		Depth depth,
+		ValueObjects.Path path)
+	{
+		Id = Guid.NewGuid();
+		Name = name;
+		Identifier = identifier;
+		ParentId = parentId;
+		CreatedAt = DateTime.UtcNow;
+		UpdatedAt = CreatedAt;
+		IsActive = true;
+		Depth = depth;
+		Path = path;
+	}
 
-    public Guid Id { get; private set; }
+	public Guid Id { get; private set; }
 
-    public Name Name { get; private set; }
+	public Name Name { get; private set; }
 
-    public Identifier Identifier { get; private set; }
+	public Identifier Identifier { get; private set; }
 
-    public Guid? ParentId { get; private set; }
+	public Guid? ParentId { get; private set; }
 
-    public ValueObjects.Path Path { get; private set; }
+	public ValueObjects.Path Path { get; private set; }
 
-    public Depth Depth { get; private set; }
+	public Depth Depth { get; private set; }
 
-    public bool IsActive { get; private set; }
+	public bool IsActive { get; private set; }
 
-    public DateTime CreatedAt { get; private set; }
+	public DateTime CreatedAt { get; private set; }
 
-    public DateTime UpdatedAt { get; private set; }
+	public DateTime UpdatedAt { get; private set; }
 }

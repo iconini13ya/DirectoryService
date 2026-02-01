@@ -4,32 +4,32 @@ namespace DirectoryService.Entities;
 
 public class Location
 {
-    public Location(
-        Name name,
-        Address address,
-        DateTime updatedAt,
-        ValueObjects.TimeZone timeZone)
-    {
-        Id = Guid.NewGuid();
-        Name = name;
-        Address = address;
-        TimeZone = timeZone;
-        IsActive = true;
-        CreatedAt = DateTime.UtcNow;
-        UpdatedAt = CreatedAt;
-    }
+	public Location(
+		Name name,
+		Address address,
+		DateTime updatedAt,
+		ValueObjects.TimeZone timeZone)
+	{
+		Id = Guid.NewGuid();
+		Name = name;
+		Address = address;
+		TimeZone = timeZone;
+		IsActive = true;
+		CreatedAt = DateTime.UtcNow;
+		UpdatedAt = CreatedAt;
+	}
 
-    public Guid Id { get; private set; }
+	public Guid Id { get; private set; }
 
-    public Name Name { get; private set; }
+	public Name Name { get; private set; }
 
-    public Address Address { get; private set; }
+	public Address Address { get; private set; }
 
-    public ValueObjects.TimeZone TimeZone { get; private set; }
+	public ValueObjects.TimeZone TimeZone { get; private set; }
 
-    public bool IsActive { get; private set; }
+	public bool IsActive { get; private set; }
 
-    public DateTime CreatedAt { get; private set; }
+	public DateTime CreatedAt { get; private set; }
 
-    public DateTime UpdatedAt { get; private set; }
+	public DateTime UpdatedAt { get; private set; }
 }
