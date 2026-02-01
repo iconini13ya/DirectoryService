@@ -20,7 +20,7 @@ public class Location
         Name = name;
         Address = address;
         TimeZone = timeZone;
-        IsActive = true;
+        IsActive = isActive;
         CreatedAt = createdAt;
         UpdatedAt = updatedAt;
         _locationDepartments = locationDepartments.ToList();
@@ -34,7 +34,7 @@ public class Location
 
     public ValueObjects.TimeZone TimeZone { get; private set; }
 
-    public bool IsActive { get; set; }
+    public bool IsActive { get; private set; }
 
     public DateTime CreatedAt { get; private set; }
 

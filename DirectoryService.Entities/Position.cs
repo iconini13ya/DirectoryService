@@ -18,7 +18,7 @@ public class Position
         Id = Guid.NewGuid();
         Name = name;
         Description = description;
-        IsActive = true;
+        IsActive = isActive;
         CreatedAt = createdAt;
         UpdatedAt = updatedAt;
         _positionDepartments = positionDepartments.ToList();
@@ -30,7 +30,7 @@ public class Position
 
     public Description Description { get; private set; }
 
-    public bool IsActive { get; set; }
+    public bool IsActive { get; private set; }
 
     public DateTime CreatedAt { get; private set; }
 

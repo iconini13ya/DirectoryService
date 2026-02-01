@@ -12,6 +12,7 @@ public class Department
         Name name,
         Identifier identifier,
         Department? parent,
+        bool isActive,
         IEnumerable<Department> child,
         IEnumerable<DepartmentLocation> departmentLocations,
         IEnumerable<DepartmentPosition> departmentPositions,
@@ -25,7 +26,7 @@ public class Department
         Parent = parent;
         CreatedAt = createdAt;
         UpdatedAt = updatedAt;
-        IsActive = true;
+        IsActive = isActive;
         _child = child.ToList();
         _departmentLocations = departmentLocations.ToList();
         _departmentPositions = departmentPositions.ToList();
@@ -43,7 +44,7 @@ public class Department
 
     public Depth Depth => new Depth(Parent);
 
-    public bool IsActive { get; set; }
+    public bool IsActive { get; private set; }
 
     IReadOnlyList<Department> Child => _child;
 
