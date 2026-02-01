@@ -1,4 +1,4 @@
-﻿using static DirectoryService.Entities.ValueObjects;
+﻿using DirectoryService.Entities.ValueObjects;
 
 namespace DirectoryService.Entities;
 
