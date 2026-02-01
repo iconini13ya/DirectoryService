@@ -4,32 +4,26 @@ namespace DirectoryService.Entities;
 
 public class Department
 {
-    private readonly List<Department> _child = [];
-    private readonly List<DepartmentLocation> _departmentLocations = [];
-    private readonly List<DepartmentPosition> _departmentPositions = [];
-
     public Department(
         Name name,
         Identifier identifier,
-        Department? parent,
+        Guid? parentId,
         bool isActive,
-        DateTime createdAt,
         DateTime updatedAt,
-        IEnumerable<Department> child,
-        IEnumerable<DepartmentLocation> departmentLocations,
-        IEnumerable<DepartmentPosition> departmentPositions
+        Depth depth,
+        ValueObjects.Path path
         )
     {
         Id = Guid.NewGuid();
         Name = name;
         Identifier = identifier;
-        Parent = parent;
-        CreatedAt = createdAt;
+        ParentId = parentId;
+        CreatedAt = DateTime.UtcNow;
         UpdatedAt = updatedAt;
         IsActive = isActive;
-        _child = child.ToList();
-        _departmentLocations = departmentLocations.ToList();
-        _departmentPositions = departmentPositions.ToList();
+        Depth = depth;
+        Path = path;
+
     }
 
     public Guid Id { get; private set; }
@@ -38,21 +32,15 @@ public class Department
 
     public Identifier Identifier { get; private set; }
 
-    public Department? Parent { get; private set; }
+    public Guid? ParentId { get; private set; }
 
-    public ValueObjects.Path Path => new ValueObjects.Path(Identifier, Parent);
+    public ValueObjects.Path Path { get; private set; }
 
-    public Depth Depth => new Depth(Parent);
+    public Depth Depth { get; private set; }
 
     public bool IsActive { get; private set; }
 
     public DateTime CreatedAt { get; private set; }
 
     public DateTime UpdatedAt { get; private set; }
-
-    IReadOnlyList<Department> Child => _child;
-
-    IReadOnlyList<DepartmentLocation> DepartmentLocations => _departmentLocations;
-
-    IReadOnlyList<DepartmentPosition> DepartmentPositions => _departmentPositions;
 }

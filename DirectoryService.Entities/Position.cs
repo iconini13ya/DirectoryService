@@ -4,24 +4,20 @@ namespace DirectoryService.Entities;
 
 public class Position
 {
-    private readonly List<DepartmentPosition> _positionDepartments = [];
 
     public Position(
         Name name,
         Description description,
         bool isActive,
-        DateTime createdAt,
-        DateTime updatedAt,
-        IEnumerable<DepartmentPosition> positionDepartments
+        DateTime updatedAt
         )
     {
         Id = Guid.NewGuid();
         Name = name;
         Description = description;
         IsActive = isActive;
-        CreatedAt = createdAt;
+        CreatedAt = DateTime.UtcNow;
         UpdatedAt = updatedAt;
-        _positionDepartments = positionDepartments.ToList();
     }
 
     public Guid Id { get; private set; }
@@ -35,7 +31,5 @@ public class Position
     public DateTime CreatedAt { get; private set; }
 
     public DateTime UpdatedAt { get; private set; }
-
-    IReadOnlyList<DepartmentPosition> PositionDepartments => _positionDepartments;
 }
 
