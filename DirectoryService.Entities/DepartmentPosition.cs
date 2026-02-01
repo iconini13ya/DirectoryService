@@ -2,7 +2,10 @@
 
 public class DepartmentPosition
 {
-    public DepartmentPosition(Guid id, Guid departmentId, Guid positionId)
+    public DepartmentPosition(
+        Guid id, 
+        Guid departmentId, 
+        Guid positionId)
     {
         Id = id;
         DepartmentId = departmentId;
