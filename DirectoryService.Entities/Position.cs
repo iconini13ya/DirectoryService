@@ -8,14 +8,13 @@ public class Position
     public Position(
         Name name,
         Description description,
-        bool isActive,
         DateTime updatedAt
         )
     {
         Id = Guid.NewGuid();
         Name = name;
         Description = description;
-        IsActive = isActive;
+        IsActive = true;
         CreatedAt = DateTime.UtcNow;
         UpdatedAt = updatedAt;
     }

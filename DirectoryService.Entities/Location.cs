@@ -7,7 +7,6 @@ public class Location
     public Location(
         Name name,
         Address address,
-        bool isActive,
         DateTime updatedAt,
         ValueObjects.TimeZone timeZone
         )
@@ -16,7 +15,7 @@ public class Location
         Name = name;
         Address = address;
         TimeZone = timeZone;
-        IsActive = isActive;
+        IsActive = true;
         CreatedAt = DateTime.UtcNow;
         UpdatedAt = updatedAt;
     }

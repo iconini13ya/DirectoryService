@@ -8,7 +8,6 @@ public class Department
         Name name,
         Identifier identifier,
         Guid? parentId,
-        bool isActive,
         DateTime updatedAt,
         Depth depth,
         ValueObjects.Path path
@@ -20,10 +19,9 @@ public class Department
         ParentId = parentId;
         CreatedAt = DateTime.UtcNow;
         UpdatedAt = updatedAt;
-        IsActive = isActive;
+        IsActive = true;
         Depth = depth;
         Path = path;
-
     }
 
     public Guid Id { get; private set; }
