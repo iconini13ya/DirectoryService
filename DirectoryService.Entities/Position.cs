@@ -8,15 +8,14 @@ public class Position
     public Position(
         Name name,
         Description description,
-        DateTime updatedAt
-        )
+        DateTime updatedAt)
     {
         Id = Guid.NewGuid();
         Name = name;
         Description = description;
         IsActive = true;
         CreatedAt = DateTime.UtcNow;
-        UpdatedAt = updatedAt;
+        UpdatedAt = CreatedAt;
     }
 
     public Guid Id { get; private set; }

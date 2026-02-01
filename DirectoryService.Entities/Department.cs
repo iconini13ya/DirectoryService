@@ -10,15 +10,14 @@ public class Department
         Guid? parentId,
         DateTime updatedAt,
         Depth depth,
-        ValueObjects.Path path
-        )
+        ValueObjects.Path path)
     {
         Id = Guid.NewGuid();
         Name = name;
         Identifier = identifier;
         ParentId = parentId;
         CreatedAt = DateTime.UtcNow;
-        UpdatedAt = updatedAt;
+        UpdatedAt = CreatedAt;
         IsActive = true;
         Depth = depth;
         Path = path;

@@ -8,8 +8,7 @@ public class Location
         Name name,
         Address address,
         DateTime updatedAt,
-        ValueObjects.TimeZone timeZone
-        )
+        ValueObjects.TimeZone timeZone)
     {
         Id = Guid.NewGuid();
         Name = name;
@@ -17,7 +16,7 @@ public class Location
         TimeZone = timeZone;
         IsActive = true;
         CreatedAt = DateTime.UtcNow;
-        UpdatedAt = updatedAt;
+        UpdatedAt = CreatedAt;
     }
 
     public Guid Id { get; private set; }
