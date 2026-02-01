@@ -46,13 +46,13 @@ public class Department
 
     public bool IsActive { get; private set; }
 
+    public DateTime CreatedAt { get; private set; }
+
+    public DateTime UpdatedAt { get; private set; }
+
     IReadOnlyList<Department> Child => _child;
 
     IReadOnlyList<DepartmentLocation> DepartmentLocations => _departmentLocations;
 
     IReadOnlyList<DepartmentPosition> DepartmentPositions => _departmentPositions;
-
-    public DateTime CreatedAt { get; private set; }
-
-    public DateTime UpdatedAt { get; private set; }
 }
