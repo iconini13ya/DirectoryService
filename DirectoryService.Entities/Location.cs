@@ -4,6 +4,8 @@ namespace DirectoryService.Entities;
 
 public class Location
 {
+	private readonly List<DepartmentLocation> _departments = [];
+
 	public Location(
 		Name name,
 		Address address,
@@ -32,4 +34,6 @@ public class Location
 	public DateTime CreatedAt { get; private set; }
 
 	public DateTime UpdatedAt { get; private set; }
+
+	IReadOnlyList<DepartmentLocation> Departments => _departments;
 }

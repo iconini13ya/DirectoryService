@@ -4,6 +4,12 @@ namespace DirectoryService.Entities;
 
 public class Department
 {
+	private readonly List<Department> _childDepartments = [];
+
+	private readonly List<DepartmentLocation> _locations = [];
+
+	private readonly List<DepartmentPosition> _positions = [];
+
 	public Department(
 		Name name,
 		Identifier identifier,
@@ -40,4 +46,10 @@ public class Department
 	public DateTime CreatedAt { get; private set; }
 
 	public DateTime UpdatedAt { get; private set; }
+
+	IReadOnlyList<Department> Child => _childDepartments;
+
+	IReadOnlyList<DepartmentLocation> Locations => _locations;
+
+	IReadOnlyList<DepartmentPosition> Positions => _positions;
 }

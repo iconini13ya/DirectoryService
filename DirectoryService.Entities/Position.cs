@@ -4,6 +4,8 @@ namespace DirectoryService.Entities;
 
 public class Position
 {
+	private readonly List<DepartmentPosition> _departments = [];
+
 	public Position(
 		Name name,
 		Description description,
@@ -28,5 +30,7 @@ public class Position
 	public DateTime CreatedAt { get; private set; }
 
 	public DateTime UpdatedAt { get; private set; }
+
+	IReadOnlyList<DepartmentPosition> Departments => _departments;
 }
 
