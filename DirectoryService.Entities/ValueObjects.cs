@@ -8,11 +8,6 @@ public sealed class ValueObjects
 {
     public record Name
     {
-        public const int MaxLength = 150;
-        public const int MinLength = 3;
-
-        public string Value { get; }
-
         public Name(string name)
         {
             if (string.IsNullOrWhiteSpace(name) || name.Length > MaxLength || name.Length < MinLength)
@@ -22,14 +17,14 @@ public sealed class ValueObjects
 
             Value = name;
         }
+
+        public const int MaxLength = 150;
+        public const int MinLength = 3;
+        public string Value { get; }
     }
 
     public record Identifier
     {
-        public const int MaxLength = 30;
-        public const int MinLength = 3;
-        public string Value { get; }
-
         public Identifier(string identifier)
         {
             if (string.IsNullOrWhiteSpace(identifier) || identifier.Length > 30 || identifier.Length < 3 || !Regex.IsMatch(identifier, @"^[a-zA-Z]+$"))
@@ -39,40 +34,38 @@ public sealed class ValueObjects
 
             Value = identifier;
         }
+
+        public const int MaxLength = 30;
+        public const int MinLength = 3;
+        public string Value { get; }
     }
 
     public record Path
     {
-        public string Value { get; }
-
-        public Path(Identifier identifier, Department? parent)
+        public Path(Identifier identifier, Path? parentPath)
         {
-            if (parent is not null)
-            {
-                Value = $"{parent.Path.Value}.{identifier.Value}";
-            }
-            Value = identifier.Value;
+            Value = parentPath?.Value is not null ?
+                $"{parentPath.Value}.{identifier.Value}" :
+                identifier.Value;
         }
+
+        public string Value { get; }
     }
 
     public record Depth
     {
-        public int Value { get; }
-
-        public Depth(Department? parent)
+        public Depth(Depth? parentDepth)
         {
-            if (parent is not null)
-            {
-                Value = parent.Depth.Value + 1;
-            }
-            Value = 1;
+            Value = parentDepth?.Value is not null ?
+                parentDepth.Value + 1 :
+                1;
         }
+
+        public int Value { get; }
     }
 
     public record TimeZone
     {
-        public string Value { get; }
-
         public TimeZone(string timeZone)
         {
             try
@@ -85,12 +78,12 @@ public sealed class ValueObjects
                 throw new ArgumentException($"Wrong argument {timeZone}, that trigger exception {e}");
             }
         }
+
+        public string Value { get; }
     }
 
     public record Description
     {
-        public string? Value { get; }
-
         public Description(string description)
         {
             if (description?.Length > 1000)
@@ -100,6 +93,8 @@ public sealed class ValueObjects
 
             Value = description;
         }
+
+        public string? Value { get; }
     }
 
 }
