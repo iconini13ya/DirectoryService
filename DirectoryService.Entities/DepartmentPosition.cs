@@ -2,6 +2,10 @@
 
 public class DepartmentPosition
 {
+
+    // EF Core
+    private DepartmentPosition() { }
+
     public DepartmentPosition(
         Guid id, 
         Guid departmentId, 

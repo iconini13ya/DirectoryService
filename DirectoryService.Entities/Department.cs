@@ -10,6 +10,9 @@ public class Department
 
     private readonly List<DepartmentPosition> _positions = [];
 
+    // EF Core
+    private Department() { }
+
     public Department(
         Name name,
         Identifier identifier,
@@ -31,15 +34,15 @@ public class Department
 
     public Guid Id { get; private set; }
 
-    public Name Name { get; private set; }
+    public Name Name { get; private set; } = null!;
 
-    public Identifier Identifier { get; private set; }
+    public Identifier Identifier { get; private set; } = null!;
 
     public Guid? ParentId { get; private set; }
 
-    public ValueObjects.Path Path { get; private set; }
+    public ValueObjects.Path Path { get; private set; } = null!;
 
-    public Depth Depth { get; private set; }
+    public Depth Depth { get; private set; } = null!;
 
     public bool IsActive { get; private set; }
 

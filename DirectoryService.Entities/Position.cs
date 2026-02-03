@@ -6,6 +6,9 @@ public class Position
 {
     private readonly List<DepartmentPosition> _departments = [];
 
+    // EF Core
+    private Position() { }
+
     public Position(
         Name name,
         Description description,
@@ -21,9 +24,9 @@ public class Position
 
     public Guid Id { get; private set; }
 
-    public Name Name { get; private set; }
+    public Name Name { get; private set; } = null!;
 
-    public Description Description { get; private set; }
+    public Description Description { get; private set; } = null!;
 
     public bool IsActive { get; private set; }
 
