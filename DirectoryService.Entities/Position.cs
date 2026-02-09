@@ -34,6 +34,6 @@ public class Position
 
     public DateTime UpdatedAt { get; private set; }
 
-    IReadOnlyList<DepartmentPosition> Departments => _departments;
+    public IReadOnlyList<DepartmentPosition> Departments => _departments;
 }
 
