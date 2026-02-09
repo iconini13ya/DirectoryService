@@ -2,14 +2,16 @@
 
 public record Description
 {
-    public Description(string description)
+    public const int MAXLENGTH = 1000;
+
+    public Description(string? description)
     {
-        if (description?.Length > 1000)
+        if (description?.Length > MAXLENGTH)
         {
-            throw new ArgumentException("Property description should not be bigger than 1000 symbols");
+            throw new ArgumentException($"Property description should not be bigger than {MAXLENGTH} symbols");
         }
 
-        Value = description;
+        Value = description ?? string.Empty;
     }
 
     public string? Value { get; }
