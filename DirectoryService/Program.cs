@@ -5,8 +5,7 @@ var builder = WebApplication.CreateBuilder(args); // Add services to the contain
 
 builder.Services.AddOpenApi();
 
-builder.Services.AddScoped<DirectoryServiceDbContext>(_ =>
-    new DirectoryServiceDbContext(builder.Configuration.GetConnectionString("DirectoryServiceDb")!));
+DependencyInjectionExtensions.AddInfrassttructurePostgres(builder.Services, builder.Configuration);
 
 builder.Services.AddSwaggerGen(options =>
 {
