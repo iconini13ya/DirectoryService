@@ -11,20 +11,44 @@ public sealed class PositionConfiguration : IEntityTypeConfiguration<Position>
 {
     public void Configure(EntityTypeBuilder<Position> builder)
     {
-        builder.ToTable("positions");
+        builder
+            .ToTable("positions");
 
-        builder.HasKey(p => p.Id).HasName("pk_positions");
+        builder
+            .HasKey(p => p.Id)
+            .HasName("pk_positions");
 
-        builder.Property(p => p.Name).IsRequired().HasMaxLength(Entities.ValueObjects.Name.MAXLENGTH).HasColumnName("name")
+        builder
+            .Property(p => p.Id)
+            .HasColumnName("id");
+
+        builder
+            .Property(p => p.Name)
+            .IsRequired()
+            .HasMaxLength(Entities.ValueObjects.Name.MAXLENGTH)
+            .HasColumnName("name")
             .HasConversion(n => n.Value, name => new Entities.ValueObjects.Name(name));
 
-        builder.Property(p => p.Description).IsRequired(false).HasMaxLength(Entities.ValueObjects.Description.MAXLENGTH).HasColumnName("description")
+        builder
+            .Property(p => p.Description)
+            .IsRequired(false)
+            .HasMaxLength(Entities.ValueObjects.Description.MAXLENGTH)
+            .HasColumnName("description")
             .HasConversion(d => d.Value, description => new Entities.ValueObjects.Description(description));
 
-        builder.Property(d => d.IsActive).IsRequired().HasColumnName("is_active");
+        builder
+            .Property(d => d.IsActive)
+            .IsRequired()
+            .HasColumnName("is_active");
 
-        builder.Property(d => d.CreatedAt).IsRequired().HasColumnName("created_at");
+        builder
+            .Property(d => d.CreatedAt)
+            .IsRequired()
+            .HasColumnName("created_at");
 
-        builder.Property(d => d.UpdatedAt).IsRequired().HasColumnName("updated_at");
+        builder
+            .Property(d => d.UpdatedAt)
+            .IsRequired()
+            .HasColumnName("updated_at");
     }
 }

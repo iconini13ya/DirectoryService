@@ -1,10 +1,10 @@
 ﻿using DirectoryService.Entities.ValueObjects;
 
-namespace DirectoryService.Entities;
+namespace DirectoryService.Entities.Department;
 
 public class Department
 {
-    private readonly List<Guid> _childDepartmentsIds = [];
+    private readonly List<DepartmentChild> _childDepartments = [];
 
     private readonly List<DepartmentLocation> _locations = [];
 
@@ -50,7 +50,7 @@ public class Department
 
     public DateTime UpdatedAt { get; private set; }
 
-    public IReadOnlyList<Guid> ChildIds => _childDepartmentsIds;
+    public IReadOnlyList<DepartmentChild> Childs => _childDepartments;
 
     public IReadOnlyList<DepartmentLocation> Locations => _locations;
 

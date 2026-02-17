@@ -1,4 +1,5 @@
-﻿using DirectoryService.Entities.ValueObjects;
+﻿using DirectoryService.Entities.Department;
+using DirectoryService.Entities.ValueObjects;
 
 namespace DirectoryService.Entities;
 

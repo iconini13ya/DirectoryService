@@ -1,4 +1,5 @@
 ﻿using DirectoryService.Entities;
+using DirectoryService.Entities.Department;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -8,13 +9,26 @@ public sealed class DepartmentPositionConfiguration : IEntityTypeConfiguration<D
 {
     public void Configure(EntityTypeBuilder<DepartmentPosition> builder)
     {
-        builder.ToTable("departmentpositions");
+        builder
+            .ToTable("department_positions");
 
-        builder.HasKey(dl => dl.Id).HasName("pk_departmentpositions");
+        builder
+            .Property(dp => dp.Id)
+            .HasColumnName("id");
 
-        builder.Property(dl => dl.DepartmentId).IsRequired().HasColumnName("department_id");
+        builder
+            .HasKey(dp => dp.Id)
+            .HasName("pk_department_positions");
 
-        builder.Property(dl => dl.PositionId).IsRequired().HasColumnName("position_id");
+        builder
+            .Property(dp => dp.DepartmentId)
+            .IsRequired()
+            .HasColumnName("department_id");
+
+        builder
+            .Property(dp => dp.PositionId)
+            .IsRequired()
+            .HasColumnName("position_id");
 
         builder
             .HasOne<Department>()
