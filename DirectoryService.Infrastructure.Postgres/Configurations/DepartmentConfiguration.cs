@@ -69,5 +69,12 @@ public sealed class DepartmentConfiguration : IEntityTypeConfiguration<Departmen
                 json => JsonSerializer.Deserialize<Entities.ValueObjects.Path>(json, JsonSerializerOptions.Default)!)
             .HasColumnType("jsonb")
             .HasColumnName("path");
+
+        builder
+            .HasOne<Department>()
+            .WithMany(d => d.Childs)
+            .HasForeignKey(dl => dl.ParentId)
+            .IsRequired(false)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

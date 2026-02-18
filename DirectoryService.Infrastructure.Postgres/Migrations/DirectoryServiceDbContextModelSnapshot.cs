@@ -22,7 +22,7 @@ namespace DirectoryService.Infrastructure.Postgres.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("DirectoryService.Entities.Department", b =>
+            modelBuilder.Entity("DirectoryService.Entities.Department.Department", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -69,33 +69,12 @@ namespace DirectoryService.Infrastructure.Postgres.Migrations
                     b.HasKey("Id")
                         .HasName("pk_departments");
 
+                    b.HasIndex("ParentId");
+
                     b.ToTable("departments", (string)null);
                 });
 
-            modelBuilder.Entity("DirectoryService.Entities.DepartmentChild", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasColumnName("id");
-
-                    b.Property<Guid>("ChildId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("child_id");
-
-                    b.Property<Guid>("ParentId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("parent_id");
-
-                    b.HasKey("Id")
-                        .HasName("pk_department_childs");
-
-                    b.HasIndex("ParentId");
-
-                    b.ToTable("department_childs", (string)null);
-                });
-
-            modelBuilder.Entity("DirectoryService.Entities.DepartmentLocation", b =>
+            modelBuilder.Entity("DirectoryService.Entities.Department.DepartmentLocation", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -120,7 +99,7 @@ namespace DirectoryService.Infrastructure.Postgres.Migrations
                     b.ToTable("department_locations", (string)null);
                 });
 
-            modelBuilder.Entity("DirectoryService.Entities.DepartmentPosition", b =>
+            modelBuilder.Entity("DirectoryService.Entities.Department.DepartmentPosition", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -222,46 +201,44 @@ namespace DirectoryService.Infrastructure.Postgres.Migrations
                     b.ToTable("positions", (string)null);
                 });
 
-            modelBuilder.Entity("DirectoryService.Entities.DepartmentChild", b =>
+            modelBuilder.Entity("DirectoryService.Entities.Department.Department", b =>
                 {
-                    b.HasOne("DirectoryService.Entities.Department", null)
+                    b.HasOne("DirectoryService.Entities.Department.Department", null)
                         .WithMany("Childs")
-                        .HasForeignKey("ParentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ParentId");
                 });
 
-            modelBuilder.Entity("DirectoryService.Entities.DepartmentLocation", b =>
+            modelBuilder.Entity("DirectoryService.Entities.Department.DepartmentLocation", b =>
                 {
-                    b.HasOne("DirectoryService.Entities.Department", null)
+                    b.HasOne("DirectoryService.Entities.Department.Department", null)
                         .WithMany("Locations")
                         .HasForeignKey("DepartmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("DirectoryService.Entities.Location", null)
                         .WithMany("Departments")
                         .HasForeignKey("LocationId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("DirectoryService.Entities.DepartmentPosition", b =>
+            modelBuilder.Entity("DirectoryService.Entities.Department.DepartmentPosition", b =>
                 {
-                    b.HasOne("DirectoryService.Entities.Department", null)
+                    b.HasOne("DirectoryService.Entities.Department.Department", null)
                         .WithMany("Positions")
                         .HasForeignKey("DepartmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("DirectoryService.Entities.Position", null)
                         .WithMany("Departments")
                         .HasForeignKey("PositionId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("DirectoryService.Entities.Department", b =>
+            modelBuilder.Entity("DirectoryService.Entities.Department.Department", b =>
                 {
                     b.Navigation("Childs");
 

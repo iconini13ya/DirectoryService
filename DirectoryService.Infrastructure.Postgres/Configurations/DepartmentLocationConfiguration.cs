@@ -34,12 +34,14 @@ public sealed class DepartmentLocationConfiguration : IEntityTypeConfiguration<D
             .HasOne<Department>()
             .WithMany(d => d.Locations)
             .HasForeignKey(dl => dl.DepartmentId)
-            .IsRequired();
+            .IsRequired()
+            .OnDelete(DeleteBehavior.Restrict);
 
         builder
             .HasOne<Location>()
             .WithMany(d => d.Departments)
             .HasForeignKey(dl => dl.LocationId)
-            .IsRequired();
+            .IsRequired()
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

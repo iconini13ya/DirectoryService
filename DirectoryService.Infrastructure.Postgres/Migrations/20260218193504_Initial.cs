@@ -28,6 +28,11 @@ namespace DirectoryService.Infrastructure.Postgres.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("pk_departments", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_departments_departments_parent_id",
+                        column: x => x.parent_id,
+                        principalTable: "departments",
+                        principalColumn: "id");
                 });
 
             migrationBuilder.CreateTable(
@@ -64,25 +69,6 @@ namespace DirectoryService.Infrastructure.Postgres.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "department_childs",
-                columns: table => new
-                {
-                    id = table.Column<Guid>(type: "uuid", nullable: false),
-                    parent_id = table.Column<Guid>(type: "uuid", nullable: false),
-                    child_id = table.Column<Guid>(type: "uuid", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_department_childs", x => x.id);
-                    table.ForeignKey(
-                        name: "FK_department_childs_departments_parent_id",
-                        column: x => x.parent_id,
-                        principalTable: "departments",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "department_locations",
                 columns: table => new
                 {
@@ -98,13 +84,13 @@ namespace DirectoryService.Infrastructure.Postgres.Migrations
                         column: x => x.department_id,
                         principalTable: "departments",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_department_locations_locations_location_id",
                         column: x => x.location_id,
                         principalTable: "locations",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -123,19 +109,14 @@ namespace DirectoryService.Infrastructure.Postgres.Migrations
                         column: x => x.department_id,
                         principalTable: "departments",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_department_positions_positions_position_id",
                         column: x => x.position_id,
                         principalTable: "positions",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_department_childs_parent_id",
-                table: "department_childs",
-                column: "parent_id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_department_locations_department_id",
@@ -156,14 +137,16 @@ namespace DirectoryService.Infrastructure.Postgres.Migrations
                 name: "IX_department_positions_position_id",
                 table: "department_positions",
                 column: "position_id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_departments_parent_id",
+                table: "departments",
+                column: "parent_id");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "department_childs");
-
             migrationBuilder.DropTable(
                 name: "department_locations");
 

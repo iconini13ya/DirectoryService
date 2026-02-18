@@ -4,7 +4,7 @@ namespace DirectoryService.Entities.Department;
 
 public class Department
 {
-    private readonly List<DepartmentChild> _childDepartments = [];
+    private readonly List<Department> _childDepartments = [];
 
     private readonly List<DepartmentLocation> _locations = [];
 
@@ -50,7 +50,7 @@ public class Department
 
     public DateTime UpdatedAt { get; private set; }
 
-    public IReadOnlyList<DepartmentChild> Childs => _childDepartments;
+    public IReadOnlyList<Department> Childs => _childDepartments;
 
     public IReadOnlyList<DepartmentLocation> Locations => _locations;
 
