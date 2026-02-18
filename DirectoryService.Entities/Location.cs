@@ -1,10 +1,14 @@
-﻿using DirectoryService.Entities.ValueObjects;
+﻿using DirectoryService.Entities.Department;
+using DirectoryService.Entities.ValueObjects;
 
 namespace DirectoryService.Entities;
 
 public class Location
 {
     private readonly List<DepartmentLocation> _departments = [];
+
+    // EF Core
+    private Location() { }
 
     public Location(
         Name name,
@@ -23,11 +27,11 @@ public class Location
 
     public Guid Id { get; private set; }
 
-    public Name Name { get; private set; }
+    public Name Name { get; private set; } = null!;
 
-    public Address Address { get; private set; }
+    public Address Address { get; private set; } = null!;
 
-    public ValueObjects.TimeZone TimeZone { get; private set; }
+    public ValueObjects.TimeZone TimeZone { get; private set; } = null!;
 
     public bool IsActive { get; private set; }
 
@@ -35,5 +39,5 @@ public class Location
 
     public DateTime UpdatedAt { get; private set; }
 
-    IReadOnlyList<DepartmentLocation> Departments => _departments;
+    public IReadOnlyList<DepartmentLocation> Departments => _departments;
 }

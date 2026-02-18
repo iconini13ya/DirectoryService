@@ -1,7 +1,11 @@
-﻿namespace DirectoryService.Entities;
+﻿namespace DirectoryService.Entities.Department;
 
 public class DepartmentPosition
 {
+
+    // EF Core
+    private DepartmentPosition() { }
+
     public DepartmentPosition(
         Guid id, 
         Guid departmentId, 

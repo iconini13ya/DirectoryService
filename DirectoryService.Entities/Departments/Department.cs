@@ -1,6 +1,6 @@
 ﻿using DirectoryService.Entities.ValueObjects;
 
-namespace DirectoryService.Entities;
+namespace DirectoryService.Entities.Department;
 
 public class Department
 {
@@ -9,6 +9,9 @@ public class Department
     private readonly List<DepartmentLocation> _locations = [];
 
     private readonly List<DepartmentPosition> _positions = [];
+
+    // EF Core
+    private Department() { }
 
     public Department(
         Name name,
@@ -31,15 +34,15 @@ public class Department
 
     public Guid Id { get; private set; }
 
-    public Name Name { get; private set; }
+    public Name Name { get; private set; } = null!;
 
-    public Identifier Identifier { get; private set; }
+    public Identifier Identifier { get; private set; } = null!;
 
     public Guid? ParentId { get; private set; }
 
-    public ValueObjects.Path Path { get; private set; }
+    public ValueObjects.Path Path { get; private set; } = null!;
 
-    public Depth Depth { get; private set; }
+    public Depth Depth { get; private set; } = null!;
 
     public bool IsActive { get; private set; }
 
@@ -47,9 +50,9 @@ public class Department
 
     public DateTime UpdatedAt { get; private set; }
 
-    IReadOnlyList<Department> Child => _childDepartments;
+    public IReadOnlyList<Department> Childs => _childDepartments;
 
-    IReadOnlyList<DepartmentLocation> Locations => _locations;
+    public IReadOnlyList<DepartmentLocation> Locations => _locations;
 
-    IReadOnlyList<DepartmentPosition> Positions => _positions;
+    public IReadOnlyList<DepartmentPosition> Positions => _positions;
 }

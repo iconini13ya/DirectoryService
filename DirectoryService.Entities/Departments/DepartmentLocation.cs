@@ -1,7 +1,10 @@
-﻿namespace DirectoryService.Entities;
+﻿namespace DirectoryService.Entities.Department;
 
 public class DepartmentLocation
 {
+    // EF Core
+    private DepartmentLocation() { }
+
     public DepartmentLocation(
         Guid id, 
         Guid departmentId, 

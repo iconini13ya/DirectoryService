@@ -1,11 +1,11 @@
-﻿using Microsoft.OpenApi;
+﻿using DirectoryService.Infrastructure.Postgres;
+using Microsoft.OpenApi;
 
 var builder = WebApplication.CreateBuilder(args); // Add services to the container.
 
-builder.Services.AddControllers();
-
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+
+DependencyInjectionExtensions.AddInfrassttructurePostgres(builder.Services, builder.Configuration);
 
 builder.Services.AddSwaggerGen(options =>
 {
@@ -34,13 +34,5 @@ app.MapOpenApi();
 
 app.UseSwagger();
 app.UseSwaggerUI();
-
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.MapGet("/test", () => "Hi");
 
 app.Run();

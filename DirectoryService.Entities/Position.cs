@@ -1,10 +1,14 @@
-﻿using DirectoryService.Entities.ValueObjects;
+﻿using DirectoryService.Entities.Department;
+using DirectoryService.Entities.ValueObjects;
 
 namespace DirectoryService.Entities;
 
 public class Position
 {
     private readonly List<DepartmentPosition> _departments = [];
+
+    // EF Core
+    private Position() { }
 
     public Position(
         Name name,
@@ -21,9 +25,9 @@ public class Position
 
     public Guid Id { get; private set; }
 
-    public Name Name { get; private set; }
+    public Name Name { get; private set; } = null!;
 
-    public Description Description { get; private set; }
+    public Description Description { get; private set; } = null!;
 
     public bool IsActive { get; private set; }
 
@@ -31,6 +35,6 @@ public class Position
 
     public DateTime UpdatedAt { get; private set; }
 
-    IReadOnlyList<DepartmentPosition> Departments => _departments;
+    public IReadOnlyList<DepartmentPosition> Departments => _departments;
 }
 
