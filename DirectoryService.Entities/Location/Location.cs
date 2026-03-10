@@ -1,7 +1,7 @@
 ﻿using DirectoryService.Entities.Department;
 using DirectoryService.Entities.ValueObjects;
 
-namespace DirectoryService.Entities;
+namespace DirectoryService.Entities.Location;
 
 public class Location
 {
@@ -13,7 +13,6 @@ public class Location
     public Location(
         Name name,
         Address address,
-        DateTime updatedAt,
         ValueObjects.TimeZone timeZone)
     {
         Id = Guid.NewGuid();

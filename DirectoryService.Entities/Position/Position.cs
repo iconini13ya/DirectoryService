@@ -1,7 +1,7 @@
 ﻿using DirectoryService.Entities.Department;
 using DirectoryService.Entities.ValueObjects;
 
-namespace DirectoryService.Entities;
+namespace DirectoryService.Entities.Position;
 
 public class Position
 {

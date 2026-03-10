@@ -1,4 +1,4 @@
-﻿using DirectoryService.Entities;
+﻿using DirectoryService.Entities.Location;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -23,24 +23,17 @@ public sealed class LocationConfiguration : IEntityTypeConfiguration<Location>
             .Property(l => l.Name)
             .IsRequired()
             .HasMaxLength(Entities.ValueObjects.Name.MAXLENGTH)
-            .HasColumnName("name")
-            .HasConversion(n => n.Value, name => new Entities.ValueObjects.Name(name));
+            .HasColumnName("name");
 
         builder
             .Property(l => l.Address)
             .IsRequired()
-            .HasColumnName("address")
-            .HasConversion(
-                a => $"{a.City},{a.Street},{a.Building}",
-                address => new Entities.ValueObjects.Address(address));
+            .HasColumnName("address");
 
         builder
             .Property(l => l.TimeZone)
             .IsRequired()
-            .HasColumnName("time_zone")
-            .HasConversion(
-                tz => tz.Value,
-                timezone => new Entities.ValueObjects.TimeZone(timezone));
+            .HasColumnName("time_zone");
 
         builder
             .Property(l => l.IsActive)
