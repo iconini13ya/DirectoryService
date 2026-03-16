@@ -1,11 +1,13 @@
-﻿using DirectoryService.Infrastructure.Postgres;
-using Microsoft.OpenApi;
+﻿using Microsoft.OpenApi;
 
 var builder = WebApplication.CreateBuilder(args); // Add services to the container.
 
 builder.Services.AddOpenApi();
+builder.Services.AddControllers();
 
-DependencyInjectionExtensions.AddInfrassttructurePostgres(builder.Services, builder.Configuration);
+DirectoryService.Infrastructure.Postgres.DependencyInjection.AddInfrassttructurePostgres(builder.Services, builder.Configuration);
+
+DirectoryService.Application.DependencyInjection.AddApplication(builder.Services);
 
 builder.Services.AddSwaggerGen(options =>
 {
@@ -34,5 +36,7 @@ app.MapOpenApi();
 
 app.UseSwagger();
 app.UseSwaggerUI();
+
+app.MapControllers();
 
 app.Run();
