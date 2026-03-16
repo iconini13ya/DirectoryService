@@ -23,17 +23,24 @@ public sealed class LocationConfiguration : IEntityTypeConfiguration<Location>
             .Property(l => l.Name)
             .IsRequired()
             .HasMaxLength(Entities.ValueObjects.Name.MAXLENGTH)
-            .HasColumnName("name");
+            .HasColumnName("name")
+            .HasConversion(n => n.Value, name => new Entities.ValueObjects.Name(name));
 
         builder
             .Property(l => l.Address)
             .IsRequired()
-            .HasColumnName("address");
+            .HasColumnName("address")
+            .HasConversion(
+                a => $"{a.City},{a.Street},{a.Building}",
+                address => new Entities.ValueObjects.Address(address));
 
         builder
             .Property(l => l.TimeZone)
             .IsRequired()
-            .HasColumnName("time_zone");
+            .HasColumnName("time_zone")
+            .HasConversion(
+                tz => tz.Value,
+                timezone => new Entities.ValueObjects.TimeZone(timezone));
 
         builder
             .Property(l => l.IsActive)
