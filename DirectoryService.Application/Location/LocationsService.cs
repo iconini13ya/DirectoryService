@@ -36,9 +36,10 @@ public sealed class LocationsService
         var locationAddress = new Address(request.address);
         var locationTimeZone = new Entities.ValueObjects.TimeZone(request.timeZone);
 
-        if ((await _locationRepository.GetLocationByNameAsync(locationName, cancellationToken) ?? 
-            await _locationRepository.GetLocationByAddressAsync(locationAddress, cancellationToken)) 
-            is not null)
+        var locationByName = await _locationRepository.GetLocationByCriteriaAsync(locationName, cancellationToken);
+        var locationByAddress = await _locationRepository.GetLocationByCriteriaAsync(locationAddress, cancellationToken);
+
+        if (locationByName is not null || locationByAddress is not null)
         {
             throw new ValidationException("Локация с таким названием или адресом уже существует в системе");
         }
