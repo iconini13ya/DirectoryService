@@ -1,5 +1,6 @@
 ﻿using DirectoryService.Entities.ValueObjects;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace DirectoryService.Infrastructure.Postgres.Repositories.Location;
 
@@ -18,13 +19,20 @@ public sealed class LocationsRepository : ILocationRepository
         _context.SaveChanges();
     }
 
-    public async Task<Guid?> GetLocationByAddressAsync(Address locationAddress, CancellationToken cancellationToken)
+    public async Task<Guid?> GetLocationByCriteriaAsync<T>(T searchCriteria, CancellationToken cancellationToken)
     {
-        return null;
-    }
+        //Expression<Func<Entities.Location.Location, bool>> predicate = searchCriteria switch
+        //{
+        //    Address address => x => x.Address == address,
+        //    Name name => x => x.Name == name,
+        //    _ => throw new ArgumentException($"Unsupported search criteria type: {typeof(T).Name}")
+        //};
 
-    public async Task<Guid?> GetLocationByNameAsync(Name locationName, CancellationToken cancellationToken)
-    {
+        //return await _context.Locations
+        //    .Where(predicate)
+        //    .Select(x => x.Id)
+        //    .FirstOrDefaultAsync(cancellationToken);
+
         return null;
     }
 }
