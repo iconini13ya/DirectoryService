@@ -14,8 +14,7 @@ public class LocationsController : ControllerBase
     public async Task<Guid> Create(
         [FromServices] LocationsService locationService,
         [FromBody] CreateLocationDto dto,
-        CancellationToken cancellationToken
-        )
+        CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(locationService);
 
