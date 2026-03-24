@@ -1,8 +1,10 @@
-﻿namespace DirectoryService.Infrastructure.Postgres.Repositories.Location;
+﻿using CSharpFunctionalExtensions;
+
+namespace DirectoryService.Infrastructure.Postgres.Repositories.Location;
 
 public interface ILocationRepository
 {
-    Task AddAsync(Entities.Location.Location location, CancellationToken cancellationToken);
+    Task<Result<Guid, Exception>> AddAsync(Entities.Location.Location location, CancellationToken cancellationToken);
 
-    Task<Guid?> GetLocationByCriteriaAsync<T>(T searchCriteria, CancellationToken cancellationToken);
+    Task<UnitResult<Exception>> GetLocationByCriteriaAsync<T>(T searchCriteria, CancellationToken cancellationToken);
 }

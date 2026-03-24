@@ -3,6 +3,7 @@ using DirectoryService.Entities.ValueObjects;
 using FluentValidation;
 using Microsoft.Extensions.Logging;
 using DirectoryService.Infrastructure.Postgres.Repositories.Location;
+using CSharpFunctionalExtensions;
 
 namespace DirectoryService.Application.Location;
 
@@ -24,12 +25,12 @@ public sealed class LocationsService
         _validator = validator;
     }
 
-    public async Task<Guid> Create(CreateLocationDto request, CancellationToken cancellationToken)
+    public async Task<Result<Guid,Exception>> Create(CreateLocationDto request, CancellationToken cancellationToken)
     {
         var validationResult = await _validator.ValidateAsync(request, cancellationToken);
         if (!validationResult.IsValid)
         {
-            throw new ValidationException(validationResult.Errors);
+            return Result.Failure<Guid, Exception>(new(validationResult.ToString()));
         }
 
         var locationName = new Name(request.name);
@@ -39,17 +40,17 @@ public sealed class LocationsService
         var locationByName = await _locationRepository.GetLocationByCriteriaAsync(locationName, cancellationToken);
         var locationByAddress = await _locationRepository.GetLocationByCriteriaAsync(locationAddress, cancellationToken);
 
-        if (locationByName is not null || locationByAddress is not null)
+        if (locationByName.IsFailure || locationByAddress.IsFailure)
         {
-            throw new ValidationException("Локация с таким названием или адресом уже существует в системе");
+            return Result.Failure<Guid, Exception>(new("Локация с таким названием или адресом уже существует в системе"));
         }
 
         var location = new Entities.Location.Location(locationName, locationAddress, locationTimeZone);
 
-        await _locationRepository.AddAsync(location, cancellationToken);
+        var resutl = await _locationRepository.AddAsync(location, cancellationToken);
 
         _logger.LogInformation("Location created with id {LocationId}", location.Id);
 
-        return location.Id;
+        return resutl;
     }
 }

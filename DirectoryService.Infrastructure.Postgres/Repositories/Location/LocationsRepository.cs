@@ -1,4 +1,5 @@
-﻿using DirectoryService.Entities.ValueObjects;
+﻿using CSharpFunctionalExtensions;
+using DirectoryService.Entities.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
@@ -12,14 +13,21 @@ public sealed class LocationsRepository : ILocationRepository
         _context = context;
     }
 
-    public async Task AddAsync(Entities.Location.Location location, CancellationToken cancellationToken)
+    public async Task<Result<Guid, Exception>> AddAsync(Entities.Location.Location location, CancellationToken cancellationToken)
     {
         await _context.Locations.AddAsync(location, cancellationToken);
-
-        _context.SaveChanges();
+        try
+        {
+            _context.SaveChanges();
+        }
+        catch (Exception ex)
+        {
+            return Result.Failure<Guid, Exception>(new(ex.Message));
+        }
+        return Result.Success<Guid, Exception>(location.Id);
     }
 
-    public async Task<Guid?> GetLocationByCriteriaAsync<T>(T searchCriteria, CancellationToken cancellationToken)
+    public async Task<UnitResult<Exception>> GetLocationByCriteriaAsync<T>(T searchCriteria, CancellationToken cancellationToken)
     {
         //Expression<Func<Entities.Location.Location, bool>> predicate = searchCriteria switch
         //{
@@ -33,6 +41,6 @@ public sealed class LocationsRepository : ILocationRepository
         //    .Select(x => x.Id)
         //    .FirstOrDefaultAsync(cancellationToken);
 
-        return null;
+        return UnitResult.Failure<Exception>(new("Somthing Went WSSrong"));
     }
 }
