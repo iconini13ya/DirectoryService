@@ -47,10 +47,10 @@ public sealed class LocationsService
 
         var location = new Entities.Location.Location(locationName, locationAddress, locationTimeZone);
 
-        var resutl = await _locationRepository.AddAsync(location, cancellationToken);
+        var result = await _locationRepository.AddAsync(location, cancellationToken);
 
         _logger.LogInformation("Location created with id {LocationId}", location.Id);
 
-        return resutl;
+        return result;
     }
 }
