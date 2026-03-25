@@ -11,6 +11,8 @@
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DirectoryService.Application\DirectoryService.Application.csproj" />
+    <ProjectReference Include="..\DirectoryService.Entities\DirectoryService.Entities.csproj" />
     <ProjectReference Include="..\DirectoryService.Infrastructure.Postgres\DirectoryService.Infrastructure.Postgres.csproj" />
   </ItemGroup>
 </Project>

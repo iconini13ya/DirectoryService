@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DirectoryService.Infrastructure.Postgres.Repositories.Location;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 namespace DirectoryService.Infrastructure.Postgres;
 
-public static class DependencyInjectionExtensions
+public static class DependencyInjection
 {
     public static IServiceCollection AddInfrassttructurePostgres(this IServiceCollection services, IConfiguration configuration)
     {
@@ -21,6 +22,8 @@ public static class DependencyInjectionExtensions
 
             options.UseLoggerFactory(loggerFactory);
         });
+
+        services.AddScoped<ILocationRepository, LocationsRepository>();
 
         return services;
     }
