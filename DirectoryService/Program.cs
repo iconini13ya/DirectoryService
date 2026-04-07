@@ -1,4 +1,5 @@
 ﻿using Microsoft.OpenApi;
+using DirectoryService.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args); // Add services to the container.
 
@@ -31,6 +32,8 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 var app = builder.Build();
+
+app.UseExtensionMiddleware();
 
 app.MapOpenApi();
 
