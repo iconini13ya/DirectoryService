@@ -33,8 +33,6 @@ builder.Services.AddSwaggerGen(options =>
 
 var app = builder.Build();
 
-app.UseExtensionMiddleware();
-
 app.MapOpenApi();
 
 app.UseSwagger();
