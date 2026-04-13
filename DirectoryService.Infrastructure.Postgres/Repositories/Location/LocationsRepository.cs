@@ -1,7 +1,6 @@
 ﻿using CSharpFunctionalExtensions;
-using DirectoryService.Entities.ValueObjects;
 using Microsoft.EntityFrameworkCore;
-using System.Linq.Expressions;
+using Shared;
 
 namespace DirectoryService.Infrastructure.Postgres.Repositories.Location;
 
@@ -13,7 +12,7 @@ public sealed class LocationsRepository : ILocationRepository
         _context = context;
     }
 
-    public async Task<Result<Guid, Exception>> AddAsync(Entities.Location.Location location, CancellationToken cancellationToken)
+    public async Task<Result<Guid, Error[]>> AddAsync(Entities.Location.Location location, CancellationToken cancellationToken)
     {
         await _context.Locations.AddAsync(location, cancellationToken);
         try
@@ -22,12 +21,12 @@ public sealed class LocationsRepository : ILocationRepository
         }
         catch (Exception ex)
         {
-            return Result.Failure<Guid, Exception>(new(ex.Message));
+            return Result.Failure<Guid, Error[]>(Error.Failure(null, ex.Message));
         }
-        return Result.Success<Guid, Exception>(location.Id);
+        return Result.Success<Guid, Error[]>(location.Id);
     }
 
-    public async Task<UnitResult<Exception>> GetLocationByCriteriaAsync<T>(T searchCriteria, CancellationToken cancellationToken)
+    public async Task<UnitResult<Error[]>> GetLocationByCriteriaAsync<T>(T searchCriteria, CancellationToken cancellationToken)
     {
         //Expression<Func<Entities.Location.Location, bool>> predicate = searchCriteria switch
         //{
@@ -41,6 +40,6 @@ public sealed class LocationsRepository : ILocationRepository
         //    .Select(x => x.Id)
         //    .FirstOrDefaultAsync(cancellationToken);
 
-        return UnitResult.Failure<Exception>(new("Somthing Went WSSrong"));
+        return UnitResult.Success<Error[]>();
     }
 }
