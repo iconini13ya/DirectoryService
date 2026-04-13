@@ -1,12 +1,16 @@
-﻿namespace Shared;
+﻿using System.Text.Json.Serialization;
+
+namespace Shared;
 
 public record Error
 {
     public string Code { get; }
     public string Message { get; }
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public ErrorType Type { get; }
     public string? InvalidField { get; }
 
+    [JsonConstructorAttribute]
     private Error(string code, string message, ErrorType type, string? invalidField = null)
     {
         Code = code;
@@ -22,6 +26,8 @@ public record Error
     public static Error Conflict(string? code, string message) => new(code ?? "value.is.conflict", message, ErrorType.CONFLICT);
 
     public static Error Failure(string? code, string message) => new(code ?? "failure", message, ErrorType.FAILURE);
+
+    public static implicit operator Error[](Error error) => new Error[] { error };
 }
 
 public enum ErrorType
