@@ -1,7 +1,7 @@
-﻿using CSharpFunctionalExtensions;
-using DirectoryService.Application.Location;
+﻿using DirectoryService.Application.Location;
 using DirectoryService.Contracts.LocationDTOs;
 using Microsoft.AspNetCore.Mvc;
+using Shared.EndpointResult;
 
 namespace DirectoryService.Controllers;
 
@@ -12,7 +12,7 @@ public class LocationsController : ControllerBase
 {
     [HttpPost]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Reliability", "CA2007:Consider calling ConfigureAwait on the awaited task", Justification = "<Pending>")]
-    public async Task<Result<Guid,Exception>> Create(
+    public async Task<EndpointResult<Guid>> Create(
         [FromServices] LocationsService locationService,
         [FromBody] CreateLocationDto dto,
         CancellationToken cancellationToken)
