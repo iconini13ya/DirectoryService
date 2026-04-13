@@ -20,7 +20,7 @@ public sealed class ErrorResult : IResult
             httpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
             httpContext.Response.ContentType = "application/json";
 
-            return httpContext.Response.WriteAsJsonAsync(_errors);
+            return httpContext.Response.WriteAsJsonAsync(Envelope.Error(_errors));
         }
 
         var distinctErrorTypes = _errors
@@ -35,9 +35,7 @@ public sealed class ErrorResult : IResult
         httpContext.Response.StatusCode = statusCode;
         httpContext.Response.ContentType = "application/json";
 
-        var envelope = Envelope.Error(_errors);
-
-        return httpContext.Response.WriteAsJsonAsync(envelope);
+        return httpContext.Response.WriteAsJsonAsync(Envelope.Error(_errors));
     }
 
     private int GetStatusCodeFromErrorType(ErrorType errorType) =>

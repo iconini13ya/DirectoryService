@@ -15,11 +15,9 @@ public class SuccessResult<TValue> : IResult
     {
         ArgumentNullException.ThrowIfNull(httpContext);
 
-        var envelope = Envelope<TValue>.Ok(_value);
-
         httpContext.Response.StatusCode = StatusCodes.Status200OK;
         httpContext.Response.ContentType = "application/json";
 
-        return httpContext.Response.WriteAsJsonAsync(envelope);
+        return httpContext.Response.WriteAsJsonAsync(Envelope<TValue>.Ok(_value));
     }
 }
