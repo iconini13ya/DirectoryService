@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirectoryService.Applicatio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirectoryService.Contracts", "..\DirectoryService.Contracts\DirectoryService.Contracts.csproj", "{92AB4A94-978B-4F82-827B-E787C464D2F0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "..\Shared\Shared.csproj", "{B44BF8E7-5FDB-4B63-ABA1-EC16CF50EA34}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{92AB4A94-978B-4F82-827B-E787C464D2F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{92AB4A94-978B-4F82-827B-E787C464D2F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{92AB4A94-978B-4F82-827B-E787C464D2F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B44BF8E7-5FDB-4B63-ABA1-EC16CF50EA34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B44BF8E7-5FDB-4B63-ABA1-EC16CF50EA34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B44BF8E7-5FDB-4B63-ABA1-EC16CF50EA34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B44BF8E7-5FDB-4B63-ABA1-EC16CF50EA34}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

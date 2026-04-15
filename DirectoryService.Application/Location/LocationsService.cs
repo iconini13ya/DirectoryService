@@ -1,9 +1,11 @@
-﻿using DirectoryService.Contracts.LocationDTOs;
+﻿using CSharpFunctionalExtensions;
+using DirectoryService.Application.Extensions;
+using DirectoryService.Contracts.LocationDTOs;
 using DirectoryService.Entities.ValueObjects;
+using DirectoryService.Infrastructure.Postgres.Repositories.Location;
 using FluentValidation;
 using Microsoft.Extensions.Logging;
-using DirectoryService.Infrastructure.Postgres.Repositories.Location;
-using CSharpFunctionalExtensions;
+using Shared;
 
 namespace DirectoryService.Application.Location;
 
@@ -25,12 +27,12 @@ public sealed class LocationsService
         _validator = validator;
     }
 
-    public async Task<Result<Guid,Exception>> Create(CreateLocationDto request, CancellationToken cancellationToken)
+    public async Task<Result<Guid, Error[]>> Create(CreateLocationDto request, CancellationToken cancellationToken)
     {
         var validationResult = await _validator.ValidateAsync(request, cancellationToken);
         if (!validationResult.IsValid)
         {
-            return Result.Failure<Guid, Exception>(new(validationResult.ToString()));
+            return validationResult.ToErrors();
         }
 
         var locationName = new Name(request.name);
@@ -42,7 +44,9 @@ public sealed class LocationsService
 
         if (locationByName.IsFailure || locationByAddress.IsFailure)
         {
-            return Result.Failure<Guid, Exception>(new("Локация с таким названием или адресом уже существует в системе"));
+            return locationByName.IsFailure ?
+                Result.Failure<Guid, Error[]>(locationByName.Error) :
+                Result.Failure<Guid, Error[]>(locationByAddress.Error);
         }
 
         var location = new Entities.Location.Location(locationName, locationAddress, locationTimeZone);
